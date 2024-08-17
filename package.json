@@ -1,6 +1,6 @@
 {
-  "name": "@skmd87/capacitor-sms-retriever",
-  "version": "0.0.4",
+  "name": "@aalzehla/capacitor-sms-retriever",
+  "version": "0.0.8",
   "description": "Capacitor plugin to retrieve SMS on Android",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -11,16 +11,16 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "SkmdCapacitorSmsRetriever.podspec"
+    "AalzehlaCapacitorSmsRetriever.podspec"
   ],
   "author": "Samer Draidi",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/skmd87/capacitor-sms-retriever.git"
+    "url": "git+https://github.com/aalzehla/capacitor-sms-retriever.git"
   },
   "bugs": {
-    "url": "https://github.com/skmd87/capacitor-sms-retriever/issues"
+    "url": "https://github.com/aalzehla/capacitor-sms-retriever/issues"
   },
   "keywords": [
     "capacitor",
@@ -44,10 +44,10 @@
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@capacitor/android": "^5.0.0",
-    "@capacitor/core": "^5.0.0",
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/core": "^6.0.0",
     "@capacitor/docgen": "^0.0.18",
-    "@capacitor/ios": "^5.0.0",
+    "@capacitor/ios": "^6.0.0",
     "@ionic/eslint-config": "^0.3.0",
     "@ionic/prettier-config": "^1.0.1",
     "@ionic/swiftlint-config": "^1.1.2",
@@ -60,7 +60,7 @@
     "typescript": "~4.1.5"
   },
   "peerDependencies": {
-    "@capacitor/core": "^5.0.0"
+    "@capacitor/core": "^6.0.0"
   },
   "prettier": "@ionic/prettier-config",
   "swiftlint": "@ionic/swiftlint-config",

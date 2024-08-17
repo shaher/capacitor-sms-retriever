@@ -8,4 +8,5 @@ export interface ErrorResponse {
 export interface CapacitorSmsRetrieverPlugin {
   startListening(): Promise<StartSuccessResponse>;
   stopListening(): Promise<void>;
+  present(): Promise<{ code: string }>;
 }

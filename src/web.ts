@@ -10,4 +10,8 @@ export class CapacitorSmsRetrieverWeb extends WebPlugin implements CapacitorSmsR
   async stopListening(): Promise<void> {
     return Promise.reject(new Error('Capacitor SMS Retriever not available on web'));
   }
+
+  async present(): Promise<{ code: string }> {
+    return Promise.reject(new Error('Capacitor SMS Retriever not available on web'));
+  }
 }
