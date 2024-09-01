@@ -1,6 +1,6 @@
 {
   "name": "@aalzehla/capacitor-sms-retriever",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Capacitor plugin to retrieve SMS on Android",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",

@@ -1,7 +1,10 @@
 package com.skmd.capacitor.smsretriever;
 
+import static android.content.Context.RECEIVER_EXPORTED;
+
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.util.Log;
 import androidx.annotation.NonNull;
 import com.getcapacitor.JSObject;
@@ -49,7 +52,11 @@ public class CapacitorSmsRetrieverPlugin extends Plugin {
                     smsReceiver = new SmsBroadcastReceiver();
                     ((SmsBroadcastReceiver) smsReceiver).setCALL(call);
                     IntentFilter filter = new IntentFilter(SMS_RETRIEVED_ACTION);
-                    getContext().registerReceiver(smsReceiver, filter);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        getContext().registerReceiver(smsReceiver, filter, RECEIVER_EXPORTED);
+                    }else {
+                        getContext().registerReceiver(smsReceiver, filter);
+                    }
                     Log.d(TAG, "SMS Registered successfully");
                 }
             }
