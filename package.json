@@ -1,7 +1,8 @@
 {
-  "name": "@aalzehla/capacitor-sms-retriever",
-  "version": "0.0.9",
-  "description": "Capacitor plugin to retrieve SMS on Android",
+  "name": "@shaher/capacitor-sms-retriever",
+  "version": "0.1.0",
+  "description": "Capacitor plugin to retrieve SMS on Android with getHashCode support",
+  "type": "module",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
@@ -11,16 +12,16 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "AalzehlaCapacitorSmsRetriever.podspec"
+    "ShaherCapacitorSmsRetriever.podspec"
   ],
   "author": "Samer Draidi",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aalzehla/capacitor-sms-retriever.git"
+    "url": "git+https://github.com/shaher/capacitor-sms-retriever.git"
   },
   "bugs": {
-    "url": "https://github.com/aalzehla/capacitor-sms-retriever/issues"
+    "url": "https://github.com/shaher/capacitor-sms-retriever/issues"
   },
   "keywords": [
     "capacitor",
@@ -44,23 +45,23 @@
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@capacitor/android": "^6.0.0",
-    "@capacitor/core": "^6.0.0",
-    "@capacitor/docgen": "^0.0.18",
-    "@capacitor/ios": "^6.0.0",
-    "@ionic/eslint-config": "^0.3.0",
-    "@ionic/prettier-config": "^1.0.1",
-    "@ionic/swiftlint-config": "^1.1.2",
-    "eslint": "^7.11.0",
-    "prettier": "~2.3.0",
-    "prettier-plugin-java": "~1.0.2",
-    "rimraf": "^3.0.2",
-    "rollup": "^2.32.0",
-    "swiftlint": "^1.0.1",
-    "typescript": "~4.1.5"
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/core": "^7.4.3",
+    "@capacitor/docgen": "^0.3.0",
+    "@capacitor/ios": "^7.4.3",
+    "@ionic/eslint-config": "^0.4.0",
+    "@ionic/prettier-config": "^4.0.0",
+    "@ionic/swiftlint-config": "^2.0.0",
+    "eslint": "^9.36.0",
+    "prettier": "~3.6.2",
+    "prettier-plugin-java": "~2.7.5",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.52.0",
+    "swiftlint": "^2.0.0",
+    "typescript": "~5.9.2"
   },
   "peerDependencies": {
-    "@capacitor/core": "^6.0.0"
+    "@capacitor/core": "^7.0.0"
   },
   "prettier": "@ionic/prettier-config",
   "swiftlint": "@ionic/swiftlint-config",

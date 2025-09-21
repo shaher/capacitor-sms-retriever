@@ -17,6 +17,7 @@ import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import java.util.ArrayList;
 
 /**
  * This class is a Capacitor plugin for retrieving SMS messages on Android devices.
@@ -85,5 +86,43 @@ public class CapacitorSmsRetrieverPlugin extends Plugin {
             smsReceiver = null;
         }
         call.resolve();
+    }
+
+    /**
+     * Presents a PIN input dialog (not implemented on Android).
+     * On Android, SMS retrieval is automatic. This method is for iOS compatibility.
+     * 
+     * @param call The plugin call object.
+     */
+    @PluginMethod
+    public void present(PluginCall call) {
+        JSObject result = new JSObject();
+        result.put("code", "");
+        call.reject("Present method not implemented on Android. Use startListening instead.");
+    }
+
+    /**
+     * Gets the app signature hash code required for SMS Retriever API.
+     * This hash must be included in SMS messages for the API to work.
+     * 
+     * @param call The plugin call object.
+     */
+    @PluginMethod
+    public void getHashCode(PluginCall call) {
+        try {
+            AppSignatureHelper helper = new AppSignatureHelper(getContext());
+            ArrayList<String> signatures = helper.getAppSignatures();
+            
+            if (signatures.size() > 0) {
+                JSObject result = new JSObject();
+                result.put("hashCode", signatures.get(0));
+                call.resolve(result);
+            } else {
+                call.reject("Unable to generate app signature hash");
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error generating app signature hash", e);
+            call.reject("Error generating app signature hash", e);
+        }
     }
 }

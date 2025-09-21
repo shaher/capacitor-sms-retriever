@@ -10,6 +10,17 @@ import SnapKit
  */
 @objc(CapacitorSmsRetrieverPlugin)
 public class CapacitorSmsRetrieverPlugin: CAPPlugin {
+    
+    @objc func startListening(_ call: CAPPluginCall) {
+        // SMS auto-retrieval is not supported on iOS
+        // iOS apps need to use the present() method to show a PIN entry UI
+        call.resolve(["body": "SMS auto-retrieval not supported on iOS. Use present() method instead."])
+    }
+    
+    @objc func stopListening(_ call: CAPPluginCall) {
+        // SMS auto-retrieval is not supported on iOS
+        call.resolve()
+    }
 
     @objc func present(_ call: CAPPluginCall) {
         let numberOfCharacters = call.getInt("numberOfCharacters") ?? 4
@@ -20,6 +31,11 @@ public class CapacitorSmsRetrieverPlugin: CAPPlugin {
            }
            
        }
+
+    @objc func getHashCode(_ call: CAPPluginCall) {
+        // App signature hash is not needed on iOS as SMS auto-retrieval is not supported
+        call.reject("getHashCode method not supported on iOS. App signature hash is only required for Android SMS Retriever API.")
+    }
 }
 
 class PinViewController: UIViewController, KAPinFieldDelegate {
@@ -75,7 +91,7 @@ class PinViewController: UIViewController, KAPinFieldDelegate {
       print("didFinishWith : \(code)")
         pinCodeTextField.animateSuccess(with: "✔️") {
         }
-        returnCall.success(["code":code])
+        returnCall.resolve(["code":code])
         self.dismiss(animated: true) {
             
         }
