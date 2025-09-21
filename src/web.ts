@@ -12,6 +12,7 @@ export class CapacitorSmsRetrieverWeb extends WebPlugin implements CapacitorSmsR
   }
 
   async present(options?: PresentOptions): Promise<{ code: string }> {
+    console.log('Present options:', options);
     return Promise.reject(new Error('Capacitor SMS Retriever not available on web'));
   }
 
