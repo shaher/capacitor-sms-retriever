@@ -1,6 +1,6 @@
 {
   "name": "@shaher/capacitor-sms-retriever",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Capacitor plugin to retrieve SMS on Android with getHashCode support",
   "type": "module",
   "main": "dist/plugin.cjs.js",
@@ -14,7 +14,7 @@
     "ios/Plugin/",
     "ShaherCapacitorSmsRetriever.podspec"
   ],
-  "author": "Samer Draidi",
+  "author": "Shaher",
   "license": "MIT",
   "repository": {
     "type": "git",

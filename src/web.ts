@@ -1,6 +1,6 @@
 import { WebPlugin } from '@capacitor/core';
 
-import type { CapacitorSmsRetrieverPlugin, HashCodeResponse, StartSuccessResponse } from './definitions';
+import type { CapacitorSmsRetrieverPlugin, HashCodeResponse, PresentOptions, StartSuccessResponse } from './definitions';
 
 export class CapacitorSmsRetrieverWeb extends WebPlugin implements CapacitorSmsRetrieverPlugin {
   async startListening(): Promise<StartSuccessResponse> {
@@ -11,7 +11,7 @@ export class CapacitorSmsRetrieverWeb extends WebPlugin implements CapacitorSmsR
     return Promise.reject(new Error('Capacitor SMS Retriever not available on web'));
   }
 
-  async present(): Promise<{ code: string }> {
+  async present(options?: PresentOptions): Promise<{ code: string }> {
     return Promise.reject(new Error('Capacitor SMS Retriever not available on web'));
   }
 

@@ -42,8 +42,8 @@ class PinViewController: UIViewController, KAPinFieldDelegate {
     lazy var centerStackView = UIStackView()
     @IBOutlet var pinCodeTextField: KAPinField!
 //    lazy var pinCodeTextField = KAPinField()
-    private var returnCall : CAPPluginCall
-    private var numberOfCharacters:Int
+    private var returnCall: CAPPluginCall?
+    private var numberOfCharacters: Int
     override func viewDidLoad() {
         super.viewDidLoad()
         makeUI()
@@ -59,13 +59,35 @@ class PinViewController: UIViewController, KAPinFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        // Ensure cleanup if view controller is deallocated unexpectedly
+        returnCall = nil
+        print("PinViewController deallocated")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        // Handle case where user dismisses without entering PIN
+        if returnCall != nil {
+            returnCall?.reject("User cancelled PIN entry")
+            returnCall = nil
+        }
+    }
+    
     private func makeUI() {
         self.view.backgroundColor = .white
+        
+        // Add close button
+        let closeButton = UIButton(type: .system)
+        closeButton.setTitle("Cancel", for: .normal)
+        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         
         centerStackView.translatesAutoresizingMaskIntoConstraints = false
         centerStackView.axis = .vertical
         centerStackView.distribution = .fillEqually
         self.view.addSubview(pinCodeTextField)
+        self.view.addSubview(closeButton)
         centerStackView.addArrangedSubview(pinCodeTextField)
         self.view.addSubview(centerStackView)
         pinCodeTextField.backgroundColor = UIColor.lightGray.withAlphaComponent(0.2)
@@ -83,17 +105,29 @@ class PinViewController: UIViewController, KAPinFieldDelegate {
                         make.width.equalToSuperview()
                         make.height.equalTo(100)
                     }
+        
+        closeButton.snp.makeConstraints { (make) in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+        }
 
            
     }
     
+    @objc private func closeButtonTapped() {
+        returnCall?.reject("User cancelled PIN entry")
+        returnCall = nil
+        self.dismiss(animated: true)
+    }
+    
     func pinField(_ field: KAPinField, didFinishWith code: String) {
-      print("didFinishWith : \(code)")
+        print("didFinishWith : \(code)")
         pinCodeTextField.animateSuccess(with: "✔️") {
         }
-        returnCall.resolve(["code":code])
-        self.dismiss(animated: true) {
-            
-        }
+        guard let call = returnCall else { return }
+        call.resolve(["code":code])
+        returnCall = nil  // Clear immediately to prevent double-calling
+        
+        self.dismiss(animated: true)
     }
 }
